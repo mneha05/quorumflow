@@ -1,7 +1,10 @@
 terraform {
   required_version = ">= 1.6"
   required_providers {
-    azurerm = { source = "hashicorp/azurerm", version = ">= 4.0" }
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">= 4.0"
+    }
   }
 }
 
@@ -17,8 +20,9 @@ variable "name" {
   type    = string
   default = "quorumflow"
 }
+
 variable "storage_name" {
-  type = string
+  type        = string
   description = "Globally unique lowercase storage account name."
 }
 
@@ -35,7 +39,10 @@ resource "azurerm_storage_account" "lake" {
   account_replication_type = "ZRS"
   is_hns_enabled           = true
   min_tls_version          = "TLS1_2"
-  tags = { system = var.name, layer = "hadoop-history" }
+  tags = {
+    system = var.name
+    layer  = "hadoop-history"
+  }
 }
 
 resource "azurerm_storage_container" "artifacts" {
@@ -55,6 +62,7 @@ resource "azurerm_container_registry" "runtime" {
 output "artifact_endpoint" {
   value = azurerm_storage_account.lake.primary_dfs_endpoint
 }
+
 output "registry" {
   value = azurerm_container_registry.runtime.login_server
 }

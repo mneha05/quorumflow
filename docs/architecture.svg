@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="590" viewBox="0 0 1200 590" role="img" aria-labelledby="title desc">
+  <title id="title">QuorumFlow architecture</title>
+  <desc id="desc">Telemetry passes through Flink and TensorFlow while Hadoop rebuilds history and a three-node consensus plane controls model versions.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0e1523"/><stop offset="1" stop-color="#090d14"/></linearGradient>
+    <linearGradient id="active" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#60f5df"/><stop offset="1" stop-color="#6ca7ff"/></linearGradient>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0l8 4-8 4z" fill="#536a84"/></marker>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#9babc4" stroke-opacity=".035"/></pattern>
+  </defs>
+  <rect width="1200" height="590" rx="22" fill="url(#bg)"/><rect width="1200" height="590" rx="22" fill="url(#grid)"/>
+  <g font-family="Inter,Segoe UI,Arial,sans-serif">
+    <text x="50" y="48" fill="#60f5df" font-size="11" font-weight="700" letter-spacing="2">DATA PLANE</text>
+    <text x="50" y="77" fill="#edf2ff" font-size="23" font-weight="650">From late telemetry to an authoritative model</text>
+
+    <g fill="none" stroke="#536a84" stroke-width="1.5" marker-end="url(#arrow)">
+      <path d="M245 176H313"/><path d="M522 176H590"/><path d="M800 176H868"/><path d="M968 236v45H796"/>
+    </g>
+
+    <g transform="translate(50 110)">
+      <rect width="195" height="132" rx="14" fill="#111a29" stroke="#2a374c"/>
+      <circle cx="28" cy="29" r="12" fill="#6ca7ff" fill-opacity=".15"/><path d="M22 29h12M28 23v12" stroke="#6ca7ff" stroke-width="2"/>
+      <text x="50" y="33" fill="#edf2ff" font-size="14" font-weight="700">Event ingress</text>
+      <text x="21" y="73" fill="#91a0b9" font-size="12">device timestamps</text><text x="21" y="94" fill="#91a0b9" font-size="12">out-of-order arrivals</text>
+      <text x="21" y="116" fill="#5e6d85" font-size="9">KINESIS · EVENT HUBS · PUB/SUB</text>
+    </g>
+    <g transform="translate(313 110)">
+      <rect width="209" height="132" rx="14" fill="#122326" stroke="#60f5df" stroke-opacity=".45"/>
+      <circle cx="28" cy="29" r="12" fill="#60f5df" fill-opacity=".12"/><text x="28" y="34" text-anchor="middle" fill="#60f5df" font-size="17">≋</text>
+      <text x="50" y="33" fill="#edf2ff" font-size="14" font-weight="700">Apache Flink</text>
+      <text x="21" y="73" fill="#a8b7c8" font-size="12">30 s event-time windows</text><text x="21" y="94" fill="#a8b7c8" font-size="12">5 s watermark · checkpoints</text>
+      <text x="21" y="116" fill="#60f5df" font-size="9">LIVE FEATURE PATH</text>
+    </g>
+    <g transform="translate(590 110)">
+      <rect width="210" height="132" rx="14" fill="#111a29" stroke="#2a374c"/>
+      <circle cx="28" cy="29" r="12" fill="#ff9e4b" fill-opacity=".15"/><text x="28" y="34" text-anchor="middle" fill="#ff9e4b" font-size="15" font-weight="700">ƒ</text>
+      <text x="50" y="33" fill="#edf2ff" font-size="14" font-weight="700">TensorFlow</text>
+      <text x="21" y="73" fill="#91a0b9" font-size="12">autoencoder reconstruction</text><text x="21" y="94" fill="#91a0b9" font-size="12">error → anomaly score</text>
+      <text x="21" y="116" fill="#5e6d85" font-size="9">VERSIONED MODEL.KERAS</text>
+    </g>
+    <g transform="translate(868 110)">
+      <rect width="282" height="132" rx="14" fill="#111a29" stroke="#2a374c"/>
+      <circle cx="28" cy="29" r="12" fill="#a78bfa" fill-opacity=".15"/><text x="28" y="34" text-anchor="middle" fill="#a78bfa" font-size="14">✓</text>
+      <text x="50" y="33" fill="#edf2ff" font-size="14" font-weight="700">Scored stream</text>
+      <text x="21" y="73" fill="#91a0b9" font-size="12">score + model version + window</text><text x="21" y="94" fill="#91a0b9" font-size="12">routed by committed control state</text>
+      <text x="21" y="116" fill="#5e6d85" font-size="9">PORTABLE SERVING CONTRACT</text>
+    </g>
+
+    <g transform="translate(590 281)">
+      <rect width="210" height="92" rx="13" fill="#111a29" stroke="#2a374c"/>
+      <text x="20" y="29" fill="#edf2ff" font-size="14" font-weight="700">Hadoop history</text>
+      <text x="20" y="54" fill="#91a0b9" font-size="11">daily baseline rebuild</text>
+      <text x="20" y="72" fill="#5e6d85" font-size="9">S3 · ADLS · GCS</text>
+    </g>
+    <path d="M590 327H470v67" fill="none" stroke="#536a84" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <text x="50" y="428" fill="#60f5df" font-size="11" font-weight="700" letter-spacing="2">CONSENSUS CONTROL PLANE</text>
+    <g transform="translate(50 452)">
+      <rect width="1100" height="91" rx="14" fill="#0d1720" stroke="#274051"/>
+      <g transform="translate(58 45)"><circle r="12" fill="#60f5df"/><circle r="21" fill="none" stroke="#60f5df" stroke-opacity=".35"/><text x="30" y="5" fill="#edf2ff" font-size="12">us-east · leader</text></g>
+      <path d="M250 45H377M534 45H660" stroke="#536a84" stroke-dasharray="4 5"/>
+      <g transform="translate(398 45)"><circle r="12" fill="#6ca7ff"/><text x="30" y="5" fill="#edf2ff" font-size="12">eu-west · follower</text></g>
+      <g transform="translate(681 45)"><circle r="12" fill="#6ca7ff"/><text x="30" y="5" fill="#edf2ff" font-size="12">ap-south · follower</text></g>
+      <rect x="878" y="21" width="183" height="49" rx="8" fill="#111f29" stroke="#60f5df" stroke-opacity=".25"/>
+      <text x="895" y="41" fill="#60f5df" font-size="9" font-weight="700">COMMITTED COMMAND</text><text x="895" y="59" fill="#edf2ff" font-family="ui-monospace,Menlo,monospace" font-size="11">model=v18 · index 4</text>
+    </g>
+    <path d="M470 452V394" fill="none" stroke="url(#active)" stroke-width="1.8" marker-end="url(#arrow)"/>
+  </g>
+</svg>

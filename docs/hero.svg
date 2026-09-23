@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">QuorumFlow</title>
+  <desc id="desc">Failure-aware streaming machine learning across three cloud regions.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0d1422"/><stop offset="1" stop-color="#070a10"/></linearGradient>
+    <linearGradient id="word" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#60f5df"/><stop offset=".55" stop-color="#6ca7ff"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
+    <radialGradient id="halo"><stop stop-color="#60f5df" stop-opacity=".22"/><stop offset="1" stop-color="#60f5df" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="38" height="38" patternUnits="userSpaceOnUse"><path d="M38 0H0V38" fill="none" stroke="#9babc4" stroke-opacity=".05"/></pattern>
+    <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="420" rx="24" fill="url(#bg)"/>
+  <rect width="1200" height="420" rx="24" fill="url(#grid)"/>
+  <circle cx="997" cy="122" r="210" fill="url(#halo)"/>
+  <g font-family="Inter,Segoe UI,Arial,sans-serif">
+    <g transform="translate(66 59)">
+      <rect width="34" height="34" rx="9" fill="#60f5df"/>
+      <text x="17" y="24" text-anchor="middle" font-size="20" font-weight="900" fill="#07110f">Q</text>
+      <text x="47" y="23" font-size="16" font-weight="700" fill="#eef3ff">QuorumFlow</text>
+    </g>
+    <text x="66" y="166" font-size="55" font-weight="680" letter-spacing="-2.5" fill="#edf2ff">Streaming intelligence</text>
+    <text x="66" y="224" font-size="55" font-weight="680" letter-spacing="-2.5" fill="url(#word)">that survives failure.</text>
+    <text x="67" y="273" font-size="16" fill="#95a2ba">TensorFlow · Flink event time · Hadoop history · Raft consensus · three clouds</text>
+    <g transform="translate(67 313)" font-size="11" font-weight="700">
+      <rect width="122" height="34" rx="17" fill="#60f5df"/><text x="61" y="22" text-anchor="middle" fill="#07110f">FAILOVER LAB</text>
+      <rect x="132" width="108" height="34" rx="17" fill="#101827" stroke="#283449"/><text x="186" y="22" text-anchor="middle" fill="#9ba8bf">2 / 3 QUORUM</text>
+    </g>
+  </g>
+  <g transform="translate(829 65)" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">
+    <path d="M172 43L73 214M172 43l102 171M73 214h201" stroke="#6ca7ff" stroke-opacity=".28" stroke-dasharray="5 7"/>
+    <g transform="translate(172 43)" filter="url(#glow)">
+      <circle r="26" fill="none" stroke="#60f5df" stroke-opacity=".5"/><circle r="15" fill="#60f5df"/>
+    </g>
+    <g transform="translate(73 214)"><circle r="21" fill="none" stroke="#6ca7ff" stroke-opacity=".35"/><circle r="12" fill="#6ca7ff"/></g>
+    <g transform="translate(274 214)"><circle r="21" fill="none" stroke="#6ca7ff" stroke-opacity=".35"/><circle r="12" fill="#6ca7ff"/></g>
+    <text x="172" y="83" text-anchor="middle" font-size="11" fill="#edf2ff">us-east</text><text x="172" y="99" text-anchor="middle" font-size="8" fill="#60f5df">LEADER · TERM 4</text>
+    <text x="73" y="253" text-anchor="middle" font-size="11" fill="#edf2ff">eu-west</text><text x="73" y="269" text-anchor="middle" font-size="8" fill="#7e8ba3">FOLLOWER</text>
+    <text x="274" y="253" text-anchor="middle" font-size="11" fill="#edf2ff">ap-south</text><text x="274" y="269" text-anchor="middle" font-size="8" fill="#7e8ba3">FOLLOWER</text>
+    <g transform="translate(105 310)"><rect width="143" height="28" rx="6" fill="#101827" stroke="#263248"/><circle cx="15" cy="14" r="4" fill="#60f5df"/><text x="28" y="18" font-size="9" fill="#aeb9ce">model=v18 committed</text></g>
+  </g>
+</svg>

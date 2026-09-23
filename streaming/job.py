@@ -7,10 +7,11 @@ import json
 from datetime import datetime
 
 from pyflink.common import Duration, Encoder, Types, WatermarkStrategy
+from pyflink.common.watermark_strategy import TimestampAssigner
 from pyflink.common.time import Time
 from pyflink.datastream import StreamExecutionEnvironment
 from pyflink.datastream.connectors.file_system import FileSink
-from pyflink.datastream.functions import ProcessWindowFunction, RuntimeContext
+from pyflink.datastream.functions import ProcessWindowFunction
 from pyflink.datastream.window import TumblingEventTimeWindows
 
 
@@ -20,7 +21,7 @@ def parse_event(line: str) -> dict[str, object]:
     return event
 
 
-class EventTimestamp:
+class EventTimestamp(TimestampAssigner):
     def extract_timestamp(self, value: dict[str, object], record_timestamp: int) -> int:
         return int(value["event_time_ms"])
 
@@ -73,4 +74,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

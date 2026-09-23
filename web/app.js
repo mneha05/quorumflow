@@ -41,7 +41,7 @@ const elements = {
 };
 
 function timestamp() {
-  cluster.tick += 7 + Math.floor(Math.random() * 13);
+  cluster.tick += 11;
   const seconds = Math.floor(cluster.tick / 1000);
   const millis = String(cluster.tick % 1000).padStart(3, "0");
   return `00:${String(seconds).padStart(2, "0")}.${millis}`;
