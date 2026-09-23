@@ -25,7 +25,7 @@ createServer((request, response) => {
   const asset = resolveAsset(new URL(request.url || "/", "http://localhost").pathname);
   response.writeHead(200, {
     "Content-Type": mimeTypes[extname(asset)] || "application/octet-stream",
-    "Cache-Control": asset.endsWith("index.html") ? "no-cache" : "public, max-age=3600",
+    "Cache-Control": "no-cache",
     "X-Content-Type-Options": "nosniff",
   });
   createReadStream(asset).pipe(response);
