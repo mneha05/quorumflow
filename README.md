@@ -151,7 +151,7 @@ streaming/    PyFlink event-time feature job
 batch/        Hadoop Streaming mapper and reducer
 infra/        AWS, Azure, and GCP Terraform roots
 k8s/          portable three-member runtime contract
-web/          live static failure lab deployed with GitHub Pages
+web/          live static failure lab deployed on Railway
 server.mjs    zero-dependency Railway production server
 docs/         diagrams and consensus design notes
 ```
