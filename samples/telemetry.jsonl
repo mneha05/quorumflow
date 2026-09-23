@@ -1,0 +1,7 @@
+{"device_id":"edge-17","timestamp":"2026-09-23T14:00:02Z","cpu":0.44,"memory":0.53,"latency_ms":31.2,"error_rate":0.002}
+{"device_id":"edge-17","timestamp":"2026-09-23T14:00:16Z","cpu":0.49,"memory":0.55,"latency_ms":34.8,"error_rate":0.003}
+{"device_id":"edge-17","timestamp":"2026-09-23T14:00:28Z","cpu":0.91,"memory":0.82,"latency_ms":188.4,"error_rate":0.117}
+{"device_id":"edge-04","timestamp":"2026-09-23T14:00:08Z","cpu":0.38,"memory":0.47,"latency_ms":28.1,"error_rate":0.001}
+{"device_id":"edge-04","timestamp":"2026-09-23T14:00:24Z","cpu":0.41,"memory":0.50,"latency_ms":29.6,"error_rate":0.002}
+{"device_id":"edge-04","timestamp":"2026-09-23T14:00:39Z","cpu":0.43,"memory":0.52,"latency_ms":30.9,"error_rate":0.001}
+
