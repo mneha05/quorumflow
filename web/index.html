@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="QuorumFlow: an interactive failure-aware streaming ML architecture simulator.">
+  <title>QuorumFlow — failure-aware streaming ML</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="QuorumFlow home">
+      <span class="brand-mark">Q</span>
+      <span>QuorumFlow</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#control-plane">Consensus</a>
+      <a href="#data-plane">Data plane</a>
+      <a id="repo-link" href="https://github.com/mneha05/quorumflow">Source ↗</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="eyebrow"><span class="pulse"></span> interactive architecture lab</div>
+      <h1>Streaming intelligence that<br><em>survives a leader failure.</em></h1>
+      <p class="lede">TensorFlow scores the signal. Flink respects event time. Hadoop rebuilds history. A Raft-style control plane keeps every region on the same model version.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#control-plane">Break the cluster</a>
+        <a class="button secondary" href="https://github.com/mneha05/quorumflow">Read the code</a>
+      </div>
+      <div class="proof-strip" aria-label="Project technologies">
+        <span>TensorFlow</span><span>Apache Flink</span><span>Hadoop</span><span>Raft</span><span>3 clouds</span>
+      </div>
+    </section>
+
+    <section class="lab section" id="control-plane">
+      <div class="section-heading">
+        <div>
+          <p class="kicker">01 / CONTROL PLANE</p>
+          <h2>Cause a failure. Watch quorum recover.</h2>
+        </div>
+        <p>The simulator follows the same term, vote, replication, and majority rules as the tested Python state machine in the repository.</p>
+      </div>
+
+      <div class="lab-grid">
+        <article class="panel topology-panel">
+          <div class="panel-head">
+            <div>
+              <span class="label">CLUSTER TOPOLOGY</span>
+              <strong id="cluster-health">3 / 3 reachable</strong>
+            </div>
+            <span class="term-chip">TERM <b id="term">1</b></span>
+          </div>
+
+          <div class="topology" id="topology" aria-live="polite">
+            <svg class="links" viewBox="0 0 680 320" preserveAspectRatio="none" aria-hidden="true">
+              <line x1="340" y1="70" x2="145" y2="238"></line>
+              <line x1="340" y1="70" x2="535" y2="238"></line>
+              <line x1="145" y1="238" x2="535" y2="238"></line>
+            </svg>
+            <button class="node leader" data-node="us-east" type="button" aria-label="us-east leader">
+              <span class="node-orbit"></span><span class="node-core"></span>
+              <span class="node-name">us-east</span><span class="node-role">LEADER</span>
+              <span class="node-log">log <b>1</b></span>
+            </button>
+            <button class="node" data-node="eu-west" type="button" aria-label="eu-west follower">
+              <span class="node-orbit"></span><span class="node-core"></span>
+              <span class="node-name">eu-west</span><span class="node-role">FOLLOWER</span>
+              <span class="node-log">log <b>1</b></span>
+            </button>
+            <button class="node" data-node="ap-south" type="button" aria-label="ap-south follower">
+              <span class="node-orbit"></span><span class="node-core"></span>
+              <span class="node-name">ap-south</span><span class="node-role">FOLLOWER</span>
+              <span class="node-log">log <b>1</b></span>
+            </button>
+          </div>
+
+          <div class="controls">
+            <button class="button danger" id="fail-button" type="button">Fail current leader</button>
+            <button class="button secondary" id="commit-button" type="button">Commit model v18</button>
+            <button class="button ghost" id="heal-button" type="button">Heal cluster</button>
+          </div>
+        </article>
+
+        <aside class="panel event-panel">
+          <div class="panel-head">
+            <div>
+              <span class="label">RAFT EVENT LOG</span>
+              <strong>Replicated decisions</strong>
+            </div>
+            <span class="live-chip"><span></span> LIVE</span>
+          </div>
+          <ol class="event-log" id="event-log" aria-live="polite">
+            <li><time>00:00.000</time><p><b>us-east</b> won term 1 with 3 votes.</p></li>
+            <li><time>00:00.014</time><p>Committed <code>model=v17</code> at log index 1.</p></li>
+            <li><time>00:00.021</time><p>Followers acknowledged AppendEntries.</p></li>
+          </ol>
+          <div class="invariant">
+            <span>SAFETY INVARIANT</span>
+            <p>A decision commits only after a majority stores the same log entry.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="data-plane">
+      <div class="section-heading">
+        <div>
+          <p class="kicker">02 / DATA PLANE</p>
+          <h2>One contract, three clouds.</h2>
+        </div>
+        <div class="cloud-tabs" role="tablist" aria-label="Cloud provider">
+          <button class="active" data-cloud="aws" role="tab" aria-selected="true">AWS</button>
+          <button data-cloud="azure" role="tab" aria-selected="false">Azure</button>
+          <button data-cloud="gcp" role="tab" aria-selected="false">GCP</button>
+        </div>
+      </div>
+
+      <div class="flow-grid">
+        <article class="flow-card">
+          <span class="flow-index">01</span>
+          <div class="flow-icon">↯</div>
+          <h3>Event ingress</h3>
+          <p id="ingress-service">Amazon MSK / Kinesis</p>
+          <small>Telemetry arrives out of order.</small>
+        </article>
+        <article class="flow-card featured">
+          <span class="flow-index">02</span>
+          <div class="flow-icon">≋</div>
+          <h3>Flink window</h3>
+          <p id="flink-service">Managed Service for Apache Flink</p>
+          <small>30 s event-time window + watermark.</small>
+        </article>
+        <article class="flow-card">
+          <span class="flow-index">03</span>
+          <div class="flow-icon">ƒ</div>
+          <h3>TensorFlow score</h3>
+          <p id="model-service">EKS / SageMaker</p>
+          <small>Autoencoder reconstruction error.</small>
+        </article>
+        <article class="flow-card">
+          <span class="flow-index">04</span>
+          <div class="flow-icon">▤</div>
+          <h3>Historical rebuild</h3>
+          <p id="batch-service">S3 / EMR</p>
+          <small>Hadoop Streaming daily backfill.</small>
+        </article>
+      </div>
+
+      <div class="contract-panel">
+        <div>
+          <span class="label">THE PORTABLE CONTRACT</span>
+          <h3>Cloud names change. Semantics do not.</h3>
+        </div>
+        <dl>
+          <div><dt>Checkpoint</dt><dd>10 s</dd></div>
+          <div><dt>Feature window</dt><dd>30 s</dd></div>
+          <div><dt>Quorum</dt><dd>2 / 3</dd></div>
+          <div><dt>Artifact</dt><dd>model.keras</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="boundary section">
+      <p class="kicker">WHAT THIS DEMO IS</p>
+      <h2>No mystery metrics. No pretend cluster.</h2>
+      <p>This page is a deterministic, client-side visualization of the repository’s consensus rules. The real Python tests exercise elections, partitions, quorum loss, log preservation, and follower catch-up. Cloud infrastructure is declarative and deliberately avoids provisioning billable managed clusters by default.</p>
+      <a href="https://github.com/mneha05/quorumflow#honest-boundaries">Inspect the boundaries →</a>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand" href="#top"><span class="brand-mark">Q</span><span>QuorumFlow</span></a>
+    <p>Built to explain failure, not hide it.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
