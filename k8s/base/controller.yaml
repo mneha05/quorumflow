@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: quorumflow-controller
+  namespace: quorumflow
+spec:
+  serviceName: quorumflow-controller
+  replicas: 3
+  selector:
+    matchLabels: { app: quorumflow-controller }
+  template:
+    metadata:
+      labels: { app: quorumflow-controller }
+    spec:
+      containers:
+        - name: controller
+          image: quorumflow/controller:dev
+          command: ["python", "-m", "quorumflow.simulate"]
+          envFrom:
+            - configMapRef: { name: quorumflow-contract }
+          resources:
+            requests: { cpu: "100m", memory: "128Mi" }
+            limits: { cpu: "500m", memory: "512Mi" }
+

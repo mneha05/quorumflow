@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: quorumflow-contract
+  namespace: quorumflow
+data:
+  CHECKPOINT_INTERVAL_MS: "10000"
+  FEATURE_WINDOW_SECONDS: "30"
+  RAFT_MEMBERS: "us-east,eu-west,ap-south"
+  MODEL_ARTIFACT: "artifacts/tensorflow/model.keras"
+
