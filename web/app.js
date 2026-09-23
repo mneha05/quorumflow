@@ -92,7 +92,7 @@ function failLeader() {
   const candidates = healthyNodes();
   if (candidates.length >= 2) {
     cluster.term += 1;
-    const [winner] = candidates.sort(([nameA, nodeA], [nameB, nodeB]) => nodeB.log - nodeA.log || nameA.localeCompare(nameB));
+    const [[winner]] = candidates.sort(([nameA, nodeA], [nameB, nodeB]) => nodeB.log - nodeA.log || nameA.localeCompare(nameB));
     cluster.leader = winner;
     addEvent(`<b>${winner}</b> won term ${cluster.term} with ${candidates.length} votes.`);
   } else {
