@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://mneha05.github.io/quorumflow/"><strong>Open the live failure lab →</strong></a>
+  <a href="https://quorumflow-production.up.railway.app/"><strong>Open the live failure lab →</strong></a>
   &nbsp;&nbsp;·&nbsp;&nbsp;
   <a href="#run-it">Run it locally</a>
   &nbsp;&nbsp;·&nbsp;&nbsp;
@@ -66,6 +66,7 @@ This repository keeps each claim close to the code that implements it.
 | Multi-cloud | portable resource contract plus AWS, Azure, and GCP Terraform roots | [`infra/`](infra) |
 | Runtime | three-member Kubernetes StatefulSet and shared configuration contract | [`k8s/base/`](k8s/base) |
 | Live explanation | dependency-free, accessible browser simulation | [`web/`](web) |
+| Railway delivery | zero-dependency Node server, health check, restart policy | [`railway.json`](railway.json) |
 
 ## Why both streaming and batch?
 
@@ -151,6 +152,7 @@ batch/        Hadoop Streaming mapper and reducer
 infra/        AWS, Azure, and GCP Terraform roots
 k8s/          portable three-member runtime contract
 web/          live static failure lab deployed with GitHub Pages
+server.mjs    zero-dependency Railway production server
 docs/         diagrams and consensus design notes
 ```
 

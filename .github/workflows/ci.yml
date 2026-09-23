@@ -32,7 +32,7 @@ jobs:
           grep -q '"device_id":"edge-04"' /tmp/baselines.jsonl
           grep -q '"device_id":"edge-17"' /tmp/baselines.jsonl
       - name: Browser simulator syntax
-        run: node --check web/app.js
+        run: npm run check
 
   terraform:
     runs-on: ubuntu-latest

@@ -1,0 +1,14 @@
+{
+  "name": "quorumflow-live-lab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Production server for the QuorumFlow interactive failure lab",
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check server.mjs && node --check web/app.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
