@@ -100,6 +100,27 @@ The application-level behavior stays fixed while managed service names change.
 
 The checked-in Terraform provisions the smallest durable substrate—object storage, registries, and cloud-native coordination resources where useful. It does not silently create expensive managed clusters. See [`infra/README.md`](infra/README.md) for the exact boundary.
 
+## Verified AWS deployment
+
+QuorumFlow's AWS substrate has been **applied to a real AWS account in `us-east-2`** through GitHub Actions using GitHub OIDC and Terraform.
+
+Verified GitHub Actions run: [Deploy AWS substrate #36801440085](https://github.com/mneha05/quorumflow/actions/runs/36801440085)
+
+Terraform's final reconciliation reported:
+
+```text
+No changes. Your infrastructure matches the configuration.
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+```
+
+The deployed resources are:
+
+- versioned S3 artifact lake: `quorumflow-lake-87b9fe73b5255fa8832af9d619`
+- DynamoDB control table: `quorumflow-raft-snapshots`
+- ECR runtime repository: `quorumflow-runtime`
+
+The workflow authenticates with AWS through a repository-scoped GitHub OIDC role rather than long-lived cloud access keys. It also emits an `aws sts get-caller-identity` receipt plus Terraform outputs as the `quorumflow-aws-deployment-receipt` workflow artifact.
+
 ## Run it
 
 **Exercise leader failover**
@@ -160,7 +181,7 @@ docs/         diagrams and consensus design notes
 
 - The consensus code is a **synchronous, deterministic Raft model**, not a production network daemon. It models the safety-relevant state transitions; it does not implement randomized election timers, RPC transport, disk WALs, membership changes, or snapshot compaction.
 - The live demo visualizes those deterministic transitions in the browser. It is not connected to a hidden cloud cluster and it does not invent throughput or latency numbers.
-- Terraform is declarative and un-applied in this repository. Cloud resources require your own credentials, project/account choices, and cost review.
+- The AWS Terraform substrate has been applied and reconciled successfully in `us-east-2` using GitHub OIDC. Azure and GCP Terraform remain declarative examples and have not been applied.
 - The TensorFlow smoke workflow trains a small synthetic-data model to prove the path works; it is not a claim about production accuracy.
 
 Those limits are intentional. They keep the interesting guarantees inspectable while leaving clear seams for a real transport, durable storage, and managed cloud execution.
