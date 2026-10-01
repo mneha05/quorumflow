@@ -86,6 +86,27 @@ jobs:
         working-directory: infra/aws
         run: terraform init
 
+      - name: Recover existing AWS resources into Terraform state
+        if: steps.auth.outputs.ready == 'true'
+        working-directory: infra/aws
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BUCKET="$(aws s3api list-buckets             --query "Buckets[?starts_with(Name, 'quorumflow-lake-')] | sort_by(@, &CreationDate)[-1].Name"             --output text)"
+          if [[ -n "$BUCKET" && "$BUCKET" != "None" ]]; then
+            terraform import -var="region=$AWS_REGION" aws_s3_bucket.lake "$BUCKET" || true
+            terraform import -var="region=$AWS_REGION" aws_s3_bucket_versioning.lake "$BUCKET" || true
+          fi
+
+          if aws dynamodb describe-table --table-name quorumflow-raft-snapshots >/dev/null 2>&1; then
+            terraform import -var="region=$AWS_REGION"               aws_dynamodb_table.control_log quorumflow-raft-snapshots || true
+          fi
+
+          if aws ecr describe-repositories --repository-names quorumflow-runtime >/dev/null 2>&1; then
+            terraform import -var="region=$AWS_REGION"               aws_ecr_repository.runtime quorumflow-runtime || true
+          fi
+
       - name: Terraform plan
         if: steps.auth.outputs.ready == 'true'
         working-directory: infra/aws
