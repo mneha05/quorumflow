@@ -12,7 +12,7 @@
           "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
         },
         "StringLike": {
-          "token.actions.githubusercontent.com:sub": "repo:mneha05/quorumflow:*"
+          "token.actions.githubusercontent.com:sub": "repo:mneha05@179867103/quorumflow@1383742692:*"
         }
       }
     }
