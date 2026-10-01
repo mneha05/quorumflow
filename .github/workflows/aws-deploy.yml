@@ -95,16 +95,16 @@ jobs:
 
           BUCKET="$(aws s3api list-buckets             --query "Buckets[?starts_with(Name, 'quorumflow-lake-')] | sort_by(@, &CreationDate)[-1].Name"             --output text)"
           if [[ -n "$BUCKET" && "$BUCKET" != "None" ]]; then
-            terraform import -var="region=$AWS_REGION" aws_s3_bucket.lake "$BUCKET" || true
-            terraform import -var="region=$AWS_REGION" aws_s3_bucket_versioning.lake "$BUCKET" || true
+            terraform import -var="region=$AWS_REGION" aws_s3_bucket.lake "$BUCKET"
+            terraform import -var="region=$AWS_REGION" aws_s3_bucket_versioning.lake "$BUCKET"
           fi
 
           if aws dynamodb describe-table --table-name quorumflow-raft-snapshots >/dev/null 2>&1; then
-            terraform import -var="region=$AWS_REGION"               aws_dynamodb_table.control_log quorumflow-raft-snapshots || true
+            terraform import -var="region=$AWS_REGION"               aws_dynamodb_table.control_log quorumflow-raft-snapshots
           fi
 
           if aws ecr describe-repositories --repository-names quorumflow-runtime >/dev/null 2>&1; then
-            terraform import -var="region=$AWS_REGION"               aws_ecr_repository.runtime quorumflow-runtime || true
+            terraform import -var="region=$AWS_REGION"               aws_ecr_repository.runtime quorumflow-runtime
           fi
 
       - name: Terraform plan
