@@ -30,8 +30,7 @@
       "Action": [
         "dynamodb:CreateTable",
         "dynamodb:DeleteTable",
-        "dynamodb:DescribeTable",
-        "dynamodb:DescribeContinuousBackups",
+        "dynamodb:Describe*",
         "dynamodb:UpdateContinuousBackups",
         "dynamodb:ListTagsOfResource",
         "dynamodb:TagResource"
